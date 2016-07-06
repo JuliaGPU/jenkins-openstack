@@ -7,7 +7,7 @@ SSH_KEY="ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDMznjfEFkq4TOJYg5qA7OzfEn2vQAuUh/
 
 USER=jenkins
 HOMEDIR=/home/$USER
-PACKAGES="openjdk-8-jre build-essential libssl-dev git cmake g++-5 gcc-5 gfortran-5 ntp ntpdate"
+PACKAGES="openjdk-8-jre build-essential libssl-dev git cmake m4 g++-5 gcc-5 gfortran-5 ntp ntpdate"
 
 echo "Add ubunutu-toolchain-r/test"
 add-apt-repository ppa:ubuntu-toolchain-r/test
