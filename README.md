@@ -14,14 +14,16 @@ You can get a log of the process with `nova console-log JenkinsBuild`
 nova stop JenkinsBuild
 
 # rember the id of the last image
-glance image-list | grep jenkins-build
+PREVIOUS_ID=`openstack image list --property name=jenkins-build -f value -c ID`
 
 # Create snapshot
 nova image-create --poll JenkinsBuild jenkins-build
 
 # Delete old image
 # Before this step all previous instances launched based on this image need to be terminated
-glance image-delete $PREVIOUS_ID
+SERVERS=`openstack server list --image ${PREVIOUS_ID} -f value -c ID`
+openstack server delete ${SERVERS}
+openstack image delete ${PREVIOUS_ID}
 
 # Delete instace
 nova delete JenkinsBuild
