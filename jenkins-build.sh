@@ -7,10 +7,11 @@ SSH_KEY="ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDMznjfEFkq4TOJYg5qA7OzfEn2vQAuUh/
 
 USER=jenkins
 HOMEDIR=/home/$USER
-PACKAGES="openjdk-8-jre build-essential git cmake m5 gcc-5 gfortran-5"
+PACKAGES="openjdk-8-jre build-essential git cmake gcc-5 gfortran-5 ntp ntpdate"
 
 echo "Add ubunutu-toolchain-r/test"
 add-apt-repository ppa:ubuntu-toolchain-r/test
+add-apt-repository ppa:openjdk-r/ppa
 
 echo "Update system"
 apt-get update
@@ -20,7 +21,7 @@ echo "Install packages"
 apt-get --yes install ${PACKAGES}
 
 echo "Create jenkins user"
-adduser --disabled-password $USER
+adduser --disabled-password --gecos "" $USER
 mkdir ${HOMEDIR}/.ssh
 echo $SSH_KEY > ${HOMEDIR}/.ssh/authorized_keys
 chown -R ${USER}:${USER} ${HOMEDIR}/.ssh
