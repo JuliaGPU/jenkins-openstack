@@ -14,12 +14,13 @@ You can get a log of the process with `nova console-log JenkinsBuild`
 nova stop JenkinsBuild
 
 # rember the id of the last image
-glance image-show | grep jenkins-build
+glance image-list | grep jenkins-build
 
 # Create snapshot
-nova image-create JenkinsBuild jenkins-build
+nova image-create --poll JenkinsBuild jenkins-build
 
 # Delete old image
+# Before this step all previous instances launched based on this image need to be terminated
 glance image-delete $PREVIOUS_ID
 
 # Delete instace
